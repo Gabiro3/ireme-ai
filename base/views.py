@@ -57,8 +57,6 @@ def registerPage(request):
     if request.user.is_authenticated:
         return redirect('home')
 
-    if request.user != "Gabiro Arnauld":
-        return render(request, 'pages/request-account.html')
 
     if request.method == 'POST':
         form = UserCreationForm(request.POST, request.FILES)
