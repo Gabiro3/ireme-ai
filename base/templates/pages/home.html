@@ -1,0 +1,586 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+<!-- ./ notifications sidebar -->
+
+<!-- settings sidebar -->
+<div class="sidebar" id="settings">
+    <div class="sidebar-header">
+        <div>
+            <i class="bi bi-gear me-2"></i>
+            Settings
+        </div>
+        <button data-sidebar-close>
+            <i class="bi bi-arrow-right"></i>
+        </button>
+    </div>
+    <div class="sidebar-content">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item px-0 border-0">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" checked>
+                    <label class="form-check-label" for="flexCheckDefault1">
+                        Remember next visits
+                    </label>
+                </div>
+            </li>
+            <li class="list-group-item px-0 border-0">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2" checked>
+                    <label class="form-check-label" for="flexCheckDefault2">
+                        Enable report generation.
+                    </label>
+                </div>
+            </li>
+            <li class="list-group-item px-0 border-0">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3" checked>
+                    <label class="form-check-label" for="flexCheckDefault3">
+                        Allow notifications.
+                    </label>
+                </div>
+            </li>
+            <li class="list-group-item px-0 border-0">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault4">
+                    <label class="form-check-label" for="flexCheckDefault4">
+                        Hide user requests
+                    </label>
+                </div>
+            </li>
+            <li class="list-group-item px-0 border-0">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault5" checked>
+                    <label class="form-check-label" for="flexCheckDefault5">
+                        Speed up demands
+                    </label>
+                </div>
+            </li>
+            <li class="list-group-item px-0 border-0">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Hide menus
+                    </label>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="sidebar-action">
+        <a href="#" class="btn btn-primary">All Settings</a>
+    </div>
+</div>
+<!-- ./ settings sidebar -->
+
+<!-- search sidebar -->
+<div class="sidebar" id="search">
+    <div class="sidebar-header">
+        Search
+        <button data-sidebar-close>
+            <i class="bi bi-arrow-right"></i>
+        </button>
+    </div>
+    <div class="sidebar-content">
+        <form class="mb-4">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Search" aria-describedby="button-search-addon">
+                <button class="btn btn-outline-light" type="button" id="button-search-addon">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </form>
+        <h6 class="mb-3">Last searched</h6>
+        <div class="mb-4">
+            <div class="d-flex align-items-center mb-3">
+                <a href="#" class="avatar avatar-sm me-3">
+                        <span class="avatar-text rounded-circle">
+                            <i class="bi bi-search"></i>
+                        </span>
+                </a>
+                <a href="#" class="flex-fill">Reports for 2021</a>
+                <a href="#" class="btn text-danger btn-sm" data-bs-toggle="tooltip" title="Remove">
+                    <i class="bi bi-x"></i>
+                </a>
+            </div>
+            <div class="d-flex align-items-center mb-3">
+                <a href="#" class="avatar avatar-sm me-3">
+                        <span class="avatar-text rounded-circle">
+                            <i class="bi bi-search"></i>
+                        </span>
+                </a>
+                <a href="#" class="flex-fill">Current users</a>
+                <a href="#" class="btn" data-bs-toggle="tooltip" title="Remove">
+                    <i class="bi bi-x"></i>
+                </a>
+            </div>
+            <div class="d-flex align-items-center mb-3">
+                <a href="#" class="avatar avatar-sm me-3">
+                        <span class="avatar-text rounded-circle">
+                            <i class="bi bi-search"></i>
+                        </span>
+                </a>
+                <a href="#" class="flex-fill">Meeting notes</a>
+                <a href="#" class="btn" data-bs-toggle="tooltip" title="Remove">
+                    <i class="bi bi-x"></i>
+                </a>
+            </div>
+        </div>
+        <h6 class="mb-3">Recently viewed</h6>
+        <div class="mb-4">
+            <div class="d-flex align-items-center mb-3">
+                <a href="#" class="avatar avatar-secondary avatar-sm me-3">
+                        <span class="avatar-text rounded-circle">
+                            <i class="bi bi-check-circle"></i>
+                        </span>
+                </a>
+                <a href="#" class="flex-fill">Todo list</a>
+                <a href="#" class="btn" data-bs-toggle="tooltip" title="Remove">
+                    <i class="bi bi-x"></i>
+                </a>
+            </div>
+            <div class="d-flex align-items-center mb-3">
+                <a href="#" class="avatar avatar-warning avatar-sm me-3">
+                        <span class="avatar-text rounded-circle">
+                            <i class="bi bi-wallet2"></i>
+                        </span>
+                </a>
+                <a href="#" class="flex-fill">Pricing table</a>
+                <a href="#" class="btn" data-bs-toggle="tooltip" title="Remove">
+                    <i class="bi bi-x"></i>
+                </a>
+            </div>
+            <div class="d-flex align-items-center mb-3">
+                <a href="#" class="avatar avatar-info avatar-sm me-3">
+                        <span class="avatar-text rounded-circle">
+                            <i class="bi bi-gear"></i>
+                        </span>
+                </a>
+                <a href="#" class="flex-fill">Settings</a>
+                <a href="#" class="btn" data-bs-toggle="tooltip" title="Remove">
+                    <i class="bi bi-x"></i>
+                </a>
+            </div>
+            <div class="d-flex align-items-center mb-3">
+                <a href="#" class="avatar avatar-success avatar-sm me-3">
+                        <span class="avatar-text rounded-circle">
+                            <i class="bi bi-person-circle"></i>
+                        </span>
+                </a>
+                <a href="#" class="flex-fill">Users</a>
+                <a href="#" class="btn" data-bs-toggle="tooltip" title="Remove">
+                    <i class="bi bi-x"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar-action">
+        <a href="#" class="btn btn-danger">All Clear</a>
+    </div>
+</div>
+<!-- ./ search sidebar -->
+
+<!-- ./ sidebars -->
+
+<!-- menu -->
+<div class="menu">
+    <div class="menu-header">
+        <a href="" class="menu-header-logo">
+            <img src="{% static '/logo.svg' %}" alt="logo">
+            <span>Ireme AI</span>
+        </a>
+        <a href="#" class="btn btn-sm menu-close-btn">
+            <i class="bi bi-x"></i>
+        </a>
+    </div>
+    <div class="menu-body">
+        <div class="dropdown">
+            <a href="{% url 'coming-soon' %}" class="d-flex align-items-center" data-bs-toggle="dropdown">
+                <div class="avatar me-3">
+                    <img src="{{request.user.avatar.url}}"
+                         class="rounded-circle" alt="image">
+                </div>
+                <div>
+                    <div class="fw-bold">{{request.user.name}}</div>
+                    <small class="text-muted">{{request.user.user_plan}}</small>
+                </div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end">
+                <a href="{% url 'coming-soon' %}" class="dropdown-item d-flex align-items-center">
+                    <i class="bi bi-person dropdown-item-icon"></i> Profile
+                </a>
+                <a href="{% url 'coming-soon' %}" class="dropdown-item d-flex align-items-center" data-sidebar-target="#settings">
+                    <i class="bi bi-gear dropdown-item-icon"></i> Settings
+                </a>
+                <a href="{% url 'logout' %}" class="dropdown-item d-flex align-items-center text-danger"
+                   target="_blank">
+                    <i class="bi bi-box-arrow-right dropdown-item-icon"></i> Logout
+                </a>
+            </div>
+        </div>
+        <ul>
+            <li class="menu-divider">Dashboard</li>
+            <li>
+                <a  class="active"  href="./dashboard.html">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-bar-chart"></i>
+                    </span>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-file-earmark-medical"></i>
+                    </span>
+                    <span>My Documents</span>
+                </a>
+                <ul>
+                    <li>
+                        <a  href="{% url 'view-files-list' %}">List view</a>
+                    </li>
+                    <li>
+                        <a  href="{% url 'view-files' %}">Grid view</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a  href="{% url 'search' %}">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-search"></i>
+                    </span>
+                    <span>Search Page</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="{% url 'coming-soon' %}">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-wallet2"></i>
+                    </span>
+                    <span>Subscriptions</span>
+                </a>
+                
+            </li>
+            <li class="menu-divider">Customer Services</li>
+            <li>
+                <a  href="{% url 'coming-soon' %}">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-file-earmark-medical"></i>
+                    </span>
+                    <span>User Guide</span>
+                    
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'coming-soon' %}">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-wallet2"></i>
+                    </span>
+                    <span>Pricing Table</span>
+                </a>
+                
+            </li>
+            <li>
+                <a href="{% url 'coming-soon' %}">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-check-circle"></i>
+                    </span>
+                    <span>Customer Support</span>
+                </a>
+                
+            </li>
+            <li>
+                <a  href="{% url 'coming-soon' %}">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-question-circle"></i>
+                    </span>
+                    <span>FAQ</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- ./  menu -->
+
+<!-- layout-wrapper -->
+<div class="layout-wrapper">
+
+    <!-- header -->
+    <div class="header">
+    <div class="menu-toggle-btn"> <!-- Menu close button for mobile devices -->
+        <a href="#">
+            <i class="bi bi-list"></i>
+        </a>
+    </div>
+    <!-- Logo -->
+    <a href="{% url 'home' %}" class="logo">
+        <img width="100" src="{% static '/logo.png' %}" alt="logo">
+    </a>
+    <!-- ./ Logo -->
+    <div class="page-title">Dashboard</div>
+    <form class="search-form" method="GET">
+        <div class="input-group">
+            <button class="btn btn-outline-light" type="button" id="button-addon1">
+                <i class="bi bi-search"></i>
+            </button>
+            <input type="text" class="form-control" placeholder="Search..." name="q"
+                   aria-label="Example text with button addon" aria-describedby="button-addon1">
+            <a href="#" class="btn btn-outline-light close-header-search-bar">
+                <i class="bi bi-x"></i>
+            </a>
+        </div>
+    </form>
+    <a href="{% url 'upload-file' %}">
+        <button class="btn btn-primary btn-icon">
+            <i class="bi bi-upload"></i> Upload Document
+            </button>
+    </a>
+    <!-- Header mobile buttons -->
+    <div class="header-mobile-buttons">
+        <a href="#" class="search-bar-btn">
+            <i class="bi bi-search"></i>
+        </a>
+        <a href="#" class="actions-btn">
+            <i class="bi bi-three-dots"></i>
+        </a>
+    </div>
+    <!-- ./ Header mobile buttons -->
+</div>
+    <!-- ./ header -->
+
+    <!-- content -->
+    <div class="content ">
+        
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col-lg-4 col-md-12">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="d-flex mb-3">
+                        <div class="display-7">
+                            <i class="bi bi-file-text"></i>
+                        </div>
+                        <div class="dropdown ms-auto">
+                            <a href="#" data-bs-toggle="dropdown" class="btn btn-sm" aria-haspopup="true"
+                               aria-expanded="false">
+                                <i class="bi bi-three-dots"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a href="#" class="dropdown-item">View Detail</a>
+                                <a href="#" class="dropdown-item">Download</a>
+                            </div>
+                        </div>
+                    </div>
+                    <h4 class="mb-3">Documents</h4>
+                    <div class="d-flex mb-3">
+                        <div class="display-7">{{docs_count}}</div>
+                        <div class="ms-auto" id="total-orders"></div>
+                    </div>
+                    <div class="text-success">
+                        Over last month 1.4% <i class="small bi bi-arrow-up"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-12">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="d-flex mb-3">
+                        <div class="display-7">
+                            <i class="bi bi-cpu"></i>
+                        </div>
+                        <div class="dropdown ms-auto">
+                            <a href="#" data-bs-toggle="dropdown" class="btn btn-sm" aria-haspopup="true"
+                               aria-expanded="false">
+                                <i class="bi bi-three-dots"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a href="#" class="dropdown-item">View Detail</a>
+                                <a href="#" class="dropdown-item">Download</a>
+                            </div>
+                        </div>
+                    </div>
+                    <h4 class="mb-3">AI Queries</h4>
+                    <div class="d-flex mb-3">
+                        <div class="display-7">{{chats_count}}</div>
+                        <div class="ms-auto" id="total-sales"></div>
+                    </div>
+                    <div class="text-danger">
+                        Over last month 2.4% <i class="small bi bi-arrow-down"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-12">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-4">
+                        <h6 class="card-title">Recent Queries</h6>
+                        <div class="dropdown ms-auto">
+                            <a href="#">View All</a>
+                        </div>
+                    </div>
+                    <div class="summary-cards">
+                        {% for query in chats %}
+                        <div>
+                            <div class="d-flex align-items-center mb-2">
+                                
+                                <div>
+                                    <h5 class="mb-1">{{query.query}}</h5>
+                                </div>
+                            </div>
+                            <div>{{query.answer}}</div>
+                            <div class="dropdown ms-auto">
+                                <a href="{% url 'file-details' query.file.id %}">Read More</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5 col-md-12">
+            <div class="card widget">
+                <div class="card-header">
+                    <h5 class="card-title">Activity Overview</h5>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="card border-0">
+                            <div class="card-body text-center">
+                                <div class="display-5">
+                                    <i class="bi bi-server text-secondary"></i>
+                                </div>
+                                <h5 class="my-3">Storage</h5>
+                                <div class="text-muted">{{storage}} MBs</div>
+                                <div class="progress mt-3" style="height: 5px">
+                                    <div class="progress-bar bg-secondary" role="progressbar" style="width: 25%"
+                                         aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card border-0">
+                            <div class="card-body text-center">
+                                <div class="display-5">
+                                    <i class="bi bi-file-earmark-medical text-warning"></i>
+                                </div>
+                                <h5 class="my-3">Documents</h5>
+                                <div class="text-muted">{{docs_count}} in Total</div>
+                                <div class="progress mt-3" style="height: 5px">
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 67%"
+                                         aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card border-0">
+                            <div class="card-body text-center">
+                                <div class="display-5">
+                                    <i class="bi bi-cpu text-info"></i>
+                                </div>
+                                <h5 class="my-3">AI Queries</h5>
+                                <div class="text-muted">{{chats_count}} AI Responses</div>
+                                <div class="progress mt-3" style="height: 5px">
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
+                                         aria-valuenow="{{chats_count}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7 col-md-12">
+            <div class="card widget">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h5 class="card-title">Recent Documents</h5>
+                    <div class="dropdown ms-auto">
+                        <a href="#" data-bs-toggle="dropdown" class="btn btn-sm btn-floating" aria-haspopup="true"
+                           aria-expanded="false">
+                            <i class="bi bi-three-dots"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a href="#" class="dropdown-item">Action</a>
+                            <a href="#" class="dropdown-item">Another action</a>
+                            <a href="#" class="dropdown-item">Something else here</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">Recently uploaded Docs. Click <a href="{% url 'view-files' %}">here</a> for more details</p>
+                    <div class="table-responsive">
+                        <table class="table table-custom mb-0" id="recent-products">
+                            <thead>
+                            <tr>
+                                
+                                <th>Icon</th>
+                                <th>Name</th>
+                                <th>File Type</th>
+                                <th>File Size</th>
+                                <th class="text-end">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for doc in docs%}
+                            <tr>
+                                
+                                <td>
+                                    <a href="#">
+                                        <img src="{{image_url}}" class="rounded" width="40"
+                                             alt="File Cover">
+                                    </a>
+                                </td>
+                                <td>{{doc.fname}}</td>
+                                <td>
+                                    <span class="text-primary">{{doc.file_type}}</span>
+                                </td>
+                                <td>{{doc.file_size}}</td>
+                                <td class="text-end">
+                                    <div class="d-flex">
+                                        <div class="dropdown ms-auto">
+                                            <a href="#" data-bs-toggle="dropdown"
+                                               class="btn btn-floating"
+                                               aria-haspopup="true" aria-expanded="false">
+                                                <i class="bi bi-three-dots"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a href="#" class="dropdown-item">Action</a>
+                                                <a href="#" class="dropdown-item">Another action</a>
+                                                <a href="#" class="dropdown-item">Something else here</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <!-- ./ content -->
+
+    <!-- content-footer -->
+    <footer class="content-footer">
+        <div><a href="https://cakeadmin.com" target="_blank">Ireme AI</a> © 2024</div>
+        <div>
+            <nav class="nav gap-4">
+                <a href="https://themeforest.net/licenses/standard" class="nav-link">Licenses</a>
+                <a href="#" class="nav-link">Change Log</a>
+                <a href="#" class="nav-link">Get Help</a>
+            </nav>
+        </div>
+    </footer>
+    <!-- ./ content-footer -->
+
+</div>
+
+{% endblock content %}

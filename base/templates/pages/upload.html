@@ -1,0 +1,114 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="form-wrapper align-items-center">
+    <div class="container">
+        <div class="card">
+            <div class="row g-0">
+                <div class="col">
+                    <div class="row">
+                        <div class="col-md-10 offset-md-1">
+                            <div class="d-block d-lg-none text-center text-lg-start">
+                                <img width="60" src="{% static '/logo.svg' %}" alt="logo">
+                            </div>
+                            <div class="my-5 text-center text-lg-start">
+                                <h1 class="display-8">Upload File</h1>
+                                <p class="text-muted">Start by uploading your file here</p>
+                            </div>
+                            {% for message in messages %}
+                            <li>{{message}}</li>
+                            {% endfor %}
+                            <form class="mb-5" id="upload-form" method="POST" action="" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="mb-3" name="fname">
+                                    <input type="text" name="fname" class="form-control" placeholder="File Name" autofocus required>
+                                </div>
+                                <div class="mb-3" name="file_content">
+                                    <input type="file" name="file_content" class="form-control" placeholder="" required>
+                                </div>
+                                <div class="text-center text-lg-start">
+                                    <button class="btn btn-primary" type="submit">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Loading Modal -->
+<div class="modal fade" id="loadingModal" tabindex="-1" aria-labelledby="loadingModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <img src="{% static 'logo.svg' %}" alt="sticker" width="50">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p>Adding some AI magic✨</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    document.getElementById('upload-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        showLoadingModal();
+
+        // Perform the form submission using fetch
+        const formData = new FormData(this);
+        fetch(this.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}'
+            }
+        })
+        .then(response => {
+            if (response.redirected) {
+                // Handle the redirection
+                window.location.href = response.url;
+            } else {
+                return response.json();
+            }
+        })
+        .then(data => {
+            // Handle the response data
+            hideLoadingModal();
+            // Display error messages if any
+            if (data.errors) {
+                alert(data.errors.join("\n"));
+            }
+        })
+        .catch(error => {
+            // Handle the error
+            console.error('Error:', error);
+            hideLoadingModal();
+        });
+    });
+
+    function showLoadingModal() {
+        const modal = new bootstrap.Modal(document.getElementById('loadingModal'));
+        modal.show();
+    }
+
+    function hideLoadingModal() {
+        const modal = bootstrap.Modal.getInstance(document.getElementById('loadingModal'));
+        modal.hide();
+    }
+
+    function showModal() {
+        const modal = new bootstrap.Modal(document.getElementById('compose'));
+        modal.show();
+    }
+</script>
+
+
+{% endblock content %}

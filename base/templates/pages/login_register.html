@@ -1,0 +1,173 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+{% if page == 'login' %}
+<!-- Flexbox container for aligning the toasts -->
+{% if messages%}
+ {% for message in messages %}
+<div id="snackbar">{{message}}!</div>
+{% endfor %}
+{% endif %}
+    <div class="form-wrapper" style="margin-top: 5rem;">
+        <div class="container">
+            <div class="card">
+                <div class="row g-0">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-md-10 offset-md-1">
+                                <div class="ltf-block-logo d-block d-lg-none text-center text-lg-start">
+                                    <img width="60" src="{% static 'logo.svg' %}" alt="logo">
+                                </div>
+                                <div class="my-5 text-center text-lg-start">
+                                    <h1 class="display-8">Welcome back!</h1>
+                                    <p class="text-muted">Log into your account now</p>
+                                </div>
+                                <form class="mb-5" method="POST">
+                                    {% csrf_token %}
+                                    <div class="mb-3">
+                                        <input type="email" name="email" class="form-control" placeholder="Enter email address" autofocus
+                                               required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <input type="password" name="password" class="form-control" placeholder="Enter password"
+                                               required>
+                                    </div>
+                                    
+                                    <div class="text-center text-lg-start">
+                                        <button class="btn btn-primary" type="submit
+                                        ">Sign In</button>
+                                    </div>
+                                </form>
+                                
+                                <p class="text-center d-block d-lg-none mt-5 mt-lg-0">
+                                    Don't have an account? <a href="{% url 'register' %}">Create One</a>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col d-none d-lg-flex border-start align-items-center justify-content-between flex-column text-center">
+                        <div class="logo">
+                            <img width="60" src="{% static 'logo.svg' %}" alt="logo">
+                        </div>
+                        <div>
+                            <h3 class="fw-bold">Welcome to Ireme AI!</h3>
+                            <p class="lead my-5">Don't have an account?</p>
+                            <a href="{% url 'register' %}" class="btn btn-primary">Create One</a>
+                        </div>
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <a href="#">Privacy Policy</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">Terms & Conditions</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+<div class="form-wrapper" style="margin-top: 2rem;">
+    <div class="container">
+        <div class="card">
+            <div class="row g-0">
+                <div class="col">
+                    <div class="row">
+                        <div class="col-md-10 offset-md-1">
+                            <div class="ltf-block-logo d-block d-lg-none text-center text-lg-start">
+                                <img width="60" src="{% static '/logo.svg' %}" alt="logo">
+                            </div>
+                            <div class="my-5 text-center text-lg-start">
+                                <h1 class="display-8">Create Account</h1>
+                                <p class="text-muted">You can create a free account now</p>
+                            </div>
+                            <form class="mb-5" method="POST", enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <input type="text" name="name" class="form-control" placeholder="Enter fullname" autofocus
+                                           required>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="email" name="email" class="form-control" placeholder="Enter email address"
+                                           required>
+                                </div>
+                                
+                                <div class="mb-3 position-relative">
+                                    <input type="password" id="password" name="password" class="form-control" placeholder="Enter password" required>
+                                    <i class="bi bi-eye toggle-password position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%); cursor: pointer; color: gray;"></i>
+                                </div>
+                                <div class="mb-3 position-relative">
+                                    <input type="password" id="password2" name="password2" class="form-control" placeholder="Re-enter password" required>
+                                    <i class="bi bi-eye toggle-password position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%); cursor: pointer;"></i>
+                                </div>
+                                
+                                <div class="text-center text-lg-start">
+                                    <button class="btn btn-primary" type="submit">Sign Up</button>
+                                </div>
+                            </form>
+                            
+                            <p class="text-center d-block d-lg-none mt-5 mt-lg-0">
+                                Already have an account? <a href="{% url 'login' %}">Sign In</a>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col d-none d-lg-flex border-start align-items-center justify-content-between flex-column text-center">
+                    <div class="logo">
+                        <img width="60" src="{% static 'logo.svg' %}" alt="logo">
+                    </div>
+                    <div>
+                        <h3 class="fw-bold">Welcome to Ireme AI!</h3>
+                        <p class="lead my-5">Do you already have an account?</p>
+                        <a href="{% url 'login' %}" class="btn btn-primary">Sign In</a>
+                    </div>
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <a href="#">Privacy Policy</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">Terms & Conditions</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- The actual snackbar -->
+ {% if messages%}
+ {% for message in messages %}
+<div id="snackbar">{{message}}</div>
+{% endfor %}
+{% endif %}
+{% endif %}
+<script>
+ document.querySelectorAll('.toggle-password').forEach(function(togglePasswordIcon) {
+  togglePasswordIcon.addEventListener('click', function() {
+      const input = this.previousElementSibling;
+      const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+      input.setAttribute('type', type);
+      this.classList.toggle('bi bi-eye');
+      this.classList.toggle('bi bi-eye-slash');
+  });
+});
+    
+
+    // script.js 
+
+  // Get the snackbar DIV
+  var x = document.getElementById("snackbar");
+
+  // Add the "show" class to DIV
+  x.className = "show";
+
+  // After 3 seconds, remove the show class from DIV
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
+
+</script>
+
+{% endblock content %}
