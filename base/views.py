@@ -89,7 +89,7 @@ def home(request):
     docs = docs[:5]
     for doc in docs:
         doc.file_summary = re.sub(r'\*\*', '', doc.file_summary)
-        docs.file_summary = re.sub(r'\*\*', '', doc.file_summary)
+        docs.file_summary = re.sub(r'\*', '', doc.file_summary)
         doc.file_size = round(doc.file_size / (1024 * 1024), 2)
         image_url = static(f'images/{doc.file_type}.png')
 
@@ -100,6 +100,8 @@ def home(request):
         Q(answer__icontains=q)
     )
     for query in chat:
+        query.answer = re.sub(r'\*\*', '', query.answer)
+        query.answer = re.sub(r'\*', '', query.answer)
         query.answer = query.answer[:50] + '...'
     context = {'docs': docs, 'chats':chat, 'storage': total_storage, 'chats_count': chat.count(), 'docs_count': docs.count(), 'image_url': image_url}
     return render(request, 'pages/home.html', context)
@@ -107,7 +109,9 @@ def home(request):
 @login_required(login_url='login')
 def upload_file(request):
     if request.method == 'POST':
+        user_files = File.objects.filter(host=request.user)
         form = FileUploadForm(request.POST, request.FILES)
+
         if form.is_valid():
             file_instance = form.save(commit=False)
             file_instance.file_size = file_instance.file_content.size
@@ -139,6 +143,7 @@ def upload_file(request):
         form = FileUploadForm()
     return render(request, 'pages/upload.html', {'form': form})
 
+@login_required(login_url='login')
 def delete_file(request, pk):
     file = File.objects.get(id=pk)
     if file.host != request.user:
@@ -179,6 +184,8 @@ def file_details(request, pk):
         dialogue.answer = re.sub(r'\*', '', dialogue.answer)
     
     if request.method == 'POST':
+        if dialogues.count() > 10 and request.user.user_plan == 'basic':
+            return render(request, 'pages/renew-plan.html')
         user_query = request.POST.get('query', '')
 
         if user_query:
@@ -214,12 +221,13 @@ def file_details(request, pk):
     context = {'file': file, 'size': size, 'dialogues': dialogues, 'image_url': image_url}
     return render(request, 'pages/file-details.html', context)
 
-
+@login_required(login_url='login')
 def user_profile(request):
     user = Techie.objects.get(id=request.user.id)
     context = {'user': user}
     return render(request, 'pages/profile.html', context)
 
+@login_required(login_url='login')
 def search_page(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     docs = File.objects.filter(host=request.user)
@@ -246,9 +254,12 @@ def search_page(request):
     
     return render(request, 'pages/search.html', context)
 
-
+@login_required(login_url='login')
 def under_construction(request):
     return render(request, 'pages/under-construction.html')
+@login_required(login_url='login')
+def pricing(request):
+    return render(request, 'pages/pricing.html')
 
 
 

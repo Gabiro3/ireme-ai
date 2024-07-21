@@ -183,10 +183,11 @@
 
 <!-- menu -->
 <!-- menu -->
+<!-- menu -->
 <div class="menu">
     <div class="menu-header">
         <a href="" class="menu-header-logo">
-            <img src="{% static '/logo.svg' %}" alt="logo">
+            <img src="{% static '/logo.png' %}" alt="logo">
             <span>Ireme AI</span>
         </a>
         <a href="#" class="btn btn-sm menu-close-btn">
@@ -195,7 +196,7 @@
     </div>
     <div class="menu-body">
         <div class="dropdown">
-            <a href="#" class="d-flex align-items-center" data-bs-toggle="dropdown">
+            <a href="{% url 'coming-soon' %}" class="d-flex align-items-center" data-bs-toggle="dropdown">
                 <div class="avatar me-3">
                     <img src="{{request.user.avatar.url}}"
                          class="rounded-circle" alt="image">
@@ -206,16 +207,13 @@
                 </div>
             </a>
             <div class="dropdown-menu dropdown-menu-end">
-                <a href="#" class="dropdown-item d-flex align-items-center">
+                <a href="{% url 'coming-soon' %}" class="dropdown-item d-flex align-items-center">
                     <i class="bi bi-person dropdown-item-icon"></i> Profile
                 </a>
-                <a href="#" class="dropdown-item d-flex align-items-center">
-                    <i class="bi bi-envelope dropdown-item-icon"></i> Inbox
-                </a>
-                <a href="#" class="dropdown-item d-flex align-items-center" data-sidebar-target="#settings">
+                <a href="{% url 'coming-soon' %}" class="dropdown-item d-flex align-items-center" data-sidebar-target="#settings">
                     <i class="bi bi-gear dropdown-item-icon"></i> Settings
                 </a>
-                <a href="./login.html" class="dropdown-item d-flex align-items-center text-danger"
+                <a href="{% url 'logout' %}" class="dropdown-item d-flex align-items-center text-danger"
                    target="_blank">
                     <i class="bi bi-box-arrow-right dropdown-item-icon"></i> Logout
                 </a>
@@ -224,7 +222,7 @@
         <ul>
             <li class="menu-divider">Dashboard</li>
             <li>
-                <a   href="./dashboard.html">
+                <a   href="{% url 'home' %}">
                     <span class="nav-link-icon">
                         <i class="bi bi-bar-chart"></i>
                     </span>
@@ -232,7 +230,7 @@
                 </a>
             </li>
             <li>
-                <a  class="active" href="#">
+                <a href="#" class="active">
                     <span class="nav-link-icon">
                         <i class="bi bi-file-earmark-medical"></i>
                     </span>
@@ -240,15 +238,15 @@
                 </a>
                 <ul>
                     <li>
-                        <a  href="./orders.html">List view</a>
+                        <a  href="{% url 'view-files-list' %}">List view</a>
                     </li>
                     <li>
-                        <a  href="./order-detail.html">Grid view</a>
+                        <a  href="{% url 'view-files' %}">Grid view</a>
                     </li>
                 </ul>
             </li>
             <li>
-                <a  href="./search-page.html">
+                <a  href="{% url 'search' %}">
                     <span class="nav-link-icon">
                         <i class="bi bi-search"></i>
                     </span>
@@ -257,7 +255,7 @@
             </li>
             
             <li>
-                <a href="#">
+                <a href="{% url 'coming-soon' %}">
                     <span class="nav-link-icon">
                         <i class="bi bi-wallet2"></i>
                     </span>
@@ -267,7 +265,7 @@
             </li>
             <li class="menu-divider">Customer Services</li>
             <li>
-                <a  href="./chats.html">
+                <a  href="{% url 'coming-soon' %}">
                     <span class="nav-link-icon">
                         <i class="bi bi-file-earmark-medical"></i>
                     </span>
@@ -276,7 +274,7 @@
                 </a>
             </li>
             <li>
-                <a href="./email.html">
+                <a href="{% url 'pricing' %}">
                     <span class="nav-link-icon">
                         <i class="bi bi-wallet2"></i>
                     </span>
@@ -285,7 +283,7 @@
                 
             </li>
             <li>
-                <a href="./todo-list.html">
+                <a href="{% url 'coming-soon' %}">
                     <span class="nav-link-icon">
                         <i class="bi bi-check-circle"></i>
                     </span>
@@ -294,7 +292,7 @@
                 
             </li>
             <li>
-                <a  href="./faq.html">
+                <a  href="{% url 'coming-soon' %}">
                     <span class="nav-link-icon">
                         <i class="bi bi-question-circle"></i>
                     </span>
@@ -317,7 +315,7 @@
         </a>
     </div>
     <!-- Logo -->
-    <a href="./dashboard.html" class="logo">
+    <a href="{% url 'home' %}" class="logo">
         <img width="100" src="{% static '/logo.png' %}" alt="logo">
     </a>
     <!-- ./ Logo -->
@@ -454,7 +452,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body text-center">
-                    <img src="{% static 'logo.svg' %}" alt="sticker" width="50">
+                    <img src="{% static 'logo.png' %}" alt="sticker" width="50">
                     <div class="spinner-border" role="status">
                         <span class="visually-hidden">Loading...</span>
                     </div>

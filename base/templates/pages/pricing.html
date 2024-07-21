@@ -1,10 +1,6 @@
 {% extends 'index.html' %}
 {% load static %}
 {% block content %}
-
-<!-- ./ notifications sidebar -->
-
-<!-- settings sidebar -->
 <div class="sidebar" id="settings">
     <div class="sidebar-header">
         <div>
@@ -221,7 +217,7 @@
         <ul>
             <li class="menu-divider">Dashboard</li>
             <li>
-                <a  class="active"  href="{% url 'home' %}">
+                <a href="{% url 'home' %}">
                     <span class="nav-link-icon">
                         <i class="bi bi-bar-chart"></i>
                     </span>
@@ -273,7 +269,7 @@
                 </a>
             </li>
             <li>
-                <a href="{% url 'pricing' %}">
+                <a href="{% url 'pricing' %}" class="active">
                     <span class="nav-link-icon">
                         <i class="bi bi-wallet2"></i>
                     </span>
@@ -318,24 +314,19 @@
         <img width="100" src="{% static '/logo.png' %}" alt="logo">
     </a>
     <!-- ./ Logo -->
-    <div class="page-title">Dashboard</div>
-    <form class="search-form" method="GET">
+    <div class="page-title">Pricing Table</div>
+    <form class="search-form">
         <div class="input-group">
             <button class="btn btn-outline-light" type="button" id="button-addon1">
                 <i class="bi bi-search"></i>
             </button>
-            <input type="text" class="form-control" placeholder="Search..." name="q"
+            <input type="text" class="form-control" placeholder="Search..."
                    aria-label="Example text with button addon" aria-describedby="button-addon1">
             <a href="#" class="btn btn-outline-light close-header-search-bar">
                 <i class="bi bi-x"></i>
             </a>
         </div>
     </form>
-    <a href="{% url 'upload-file' %}">
-        <button class="btn btn-primary btn-icon">
-            <i class="bi bi-upload"></i> Upload Document
-            </button>
-    </a>
     <!-- Header mobile buttons -->
     <div class="header-mobile-buttons">
         <a href="#" class="search-bar-btn">
@@ -352,213 +343,151 @@
     <!-- content -->
     <div class="content ">
         
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col-lg-4 col-md-12">
-            <div class="card h-100">
-                <div class="card-body">
-                    <div class="d-flex mb-3">
-                        <div class="display-7">
-                            <i class="bi bi-file-text"></i>
-                        </div>
-                        <div class="dropdown ms-auto">
-                            <a href="#" data-bs-toggle="dropdown" class="btn btn-sm" aria-haspopup="true"
-                               aria-expanded="false">
-                                <i class="bi bi-three-dots"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item">View Detail</a>
-                                <a href="#" class="dropdown-item">Download</a>
-                            </div>
-                        </div>
+    <div class="text-center my-5">
+        <div class="row mb-5">
+            <div class="col-md-6 m-auto">
+                <p class="lead mb-0">Choose one of the plans that suits you. You will get a better service with the upgraded package.</p>
+            </div>
+        </div>
+
+        <div class="btn-group mb-3" role="group">
+            <input type="radio" class="btn-check" name="priceChangeSwitch" id="option1" value="1" checked>
+            <label class="btn btn-lg btn-outline-primary" for="option1">Monthly</label>
+
+            <input type="radio" class="btn-check" name="priceChangeSwitch" id="option2" value="2">
+            <label class="btn btn-lg btn-outline-primary" for="option2">Yearly</label>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="py-4">
+                    <div class="d-flex align-items-center justify-content-center mb-4">
+                        <span class="display-6 me-3">500 FRW / Document</span>
                     </div>
-                    <h4 class="mb-3">Documents</h4>
-                    <div class="d-flex mb-3">
-                        <div class="display-7">{{docs_count}}</div>
-                        <div class="ms-auto" id="total-orders"></div>
+                    <div class="mb-4">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <i class="bi bi-x text-danger me-2"></i>
+                                <del class="text-danger">Unlimited AI Queries</del>
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check2 me-2"></i>
+                                Document Summarization
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check2 me-2"></i>
+                                Document Tagging
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-x text-danger me-2"></i>
+                                <del class="text-danger">Unlimited file uploads</del>
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-x text-danger me-2"></i>
+                                <del class="text-danger">Unlimited file storage</del>
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check2 me-2"></i>
+                                Up to 5 questions per Document
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-x text-danger me-2"></i>
+                                <del class="text-danger">File sharing</del>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="text-success">
-                        Over last month 1.4% <i class="small bi bi-arrow-up"></i>
+                    <div class="text-center">
+                        <a href="{% url 'register' %}" class="btn btn-primary">Start Trial</a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-12">
-            <div class="card h-100">
-                <div class="card-body">
-                    <div class="d-flex mb-3">
-                        <div class="display-7">
-                            <i class="bi bi-cpu"></i>
-                        </div>
-                        <div class="dropdown ms-auto">
-                            <a href="#" data-bs-toggle="dropdown" class="btn btn-sm" aria-haspopup="true"
-                               aria-expanded="false">
-                                <i class="bi bi-three-dots"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item">View Detail</a>
-                                <a href="#" class="dropdown-item">Download</a>
-                            </div>
-                        </div>
+        <div class="col-md-4">
+            <div class="card card-selected">
+                <div class="py-4">
+                    <div class="d-flex align-items-center justify-content-center mb-4">
+                        <span class="display-4 me-3" data-price1-text="">20,000 RWF</span>
+                        <span class="text-muted" data-price1-label="">Monthly</span>
                     </div>
-                    <h4 class="mb-3">AI Queries</h4>
-                    <div class="d-flex mb-3">
-                        <div class="display-7">{{chats_count}}</div>
-                        <div class="ms-auto" id="total-sales"></div>
-                    </div>
-                    <div class="text-danger">
-                        Over last month 2.4% <i class="small bi bi-arrow-down"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-12">
-            <div class="card h-100">
-                <div class="card-body">
-                    <div class="d-flex align-items-center mb-4">
-                        <h6 class="card-title">Recent Queries</h6>
-                        <div class="dropdown ms-auto">
-                            <a href="#">View All</a>
-                        </div>
-                    </div>
-                    <div class="summary-cards">
-                        {% for query in chats %}
-                        <div>
-                            <div class="d-flex align-items-center mb-2">
-                                
-                                <div>
-                                    <h5 class="mb-1">{{query.query}}</h5>
-                                </div>
-                            </div>
-                            <div>{{query.answer}}</div>
-                            <div class="dropdown ms-auto">
-                                <a href="{% url 'file-details' query.file.id %}">Read More</a>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-5 col-md-12">
-            <div class="card widget">
-                <div class="card-header">
-                    <h5 class="card-title">Activity Overview</h5>
-                </div>
-                <div class="row g-4">
-                    <div class="col-md-6">
-                        <div class="card border-0">
-                            <div class="card-body text-center">
-                                <div class="display-5">
-                                    <i class="bi bi-server text-secondary"></i>
-                                </div>
-                                <h5 class="my-3">Storage</h5>
-                                <div class="text-muted">{{storage}} MBs</div>
-                                <div class="progress mt-3" style="height: 5px">
-                                    <div class="progress-bar bg-secondary" role="progressbar" style="width: 25%"
-                                         aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card border-0">
-                            <div class="card-body text-center">
-                                <div class="display-5">
-                                    <i class="bi bi-file-earmark-medical text-warning"></i>
-                                </div>
-                                <h5 class="my-3">Documents</h5>
-                                <div class="text-muted">{{docs_count}} in Total</div>
-                                <div class="progress mt-3" style="height: 5px">
-                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 67%"
-                                         aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card border-0">
-                            <div class="card-body text-center">
-                                <div class="display-5">
-                                    <i class="bi bi-cpu text-info"></i>
-                                </div>
-                                <h5 class="my-3">AI Queries</h5>
-                                <div class="text-muted">{{chats_count}} AI Responses</div>
-                                <div class="progress mt-3" style="height: 5px">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
-                                         aria-valuenow="{{chats_count}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="mb-4">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <i class="bi bi-x text-danger me-2"></i>
+                                <del class="text-danger">Unlimited AI Queries</del>
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check2 me-2"></i>
+                                Document Summarization
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check2 me-2"></i>
+                                Document Tagging
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check2 me-2"></i>
+                                <del class="text-danger">Unlimited file uploads</del>
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check2 me-2"></i>
+                                Unlimited file storage
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check2 me-2"></i>
+                                Up to 10 questions per Document
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check2 me-2"></i>
+                               File Sharing
+                            </li>
                     
+                        </ul>
+                    </div>
+                    <div class="text-center">
+                        <a href="#" class="btn btn-primary">Get Started</a>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-7 col-md-12">
-            <div class="card widget">
-                <div class="card-header d-flex align-items-center justify-content-between">
-                    <h5 class="card-title">Recent Documents</h5>
-                    <div class="dropdown ms-auto">
-                        <a href="#" data-bs-toggle="dropdown" class="btn btn-sm btn-floating" aria-haspopup="true"
-                           aria-expanded="false">
-                            <i class="bi bi-three-dots"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end">
-                            <a href="#" class="dropdown-item">View</a>
-                            <a href="#" class="dropdown-item">Another action</a>
-                            <a href="#" class="dropdown-item">Something else here</a>
-                        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="py-4">
+                    <div class="d-flex align-items-center justify-content-center mb-4">
+                        <span class="display-4 me-3" data-price2-text="">Custom</span>
+                        <span class="text-muted" data-price2-label="">Pricing</span>
                     </div>
-                </div>
-                <div class="card-body">
-                    <p class="text-muted">Recently uploaded Docs. Click <a href="{% url 'view-files' %}">here</a> for more details</p>
-                    <div class="table-responsive">
-                        <table class="table table-custom mb-0" id="recent-products">
-                            <thead>
-                            <tr>
-                                
-                                <th>Icon</th>
-                                <th>Name</th>
-                                <th>File Type</th>
-                                <th>File Size</th>
-                                <th class="text-end">Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                {% for doc in docs%}
-                            <tr>
-                                
-                                <td>
-                                    <a href="#">
-                                        <img src="{{image_url}}" class="rounded" width="40"
-                                             alt="File Cover">
-                                    </a>
-                                </td>
-                                <td>{{doc.fname}}</td>
-                                <td>
-                                    <span class="text-primary">{{doc.file_type}}</span>
-                                </td>
-                                <td>{{doc.file_size}} MBs</td>
-                                <td class="text-end">
-                                    <div class="d-flex">
-                                        <div class="dropdown ms-auto">
-                                            <a href="#" data-bs-toggle="dropdown"
-                                               class="btn btn-floating"
-                                               aria-haspopup="true" aria-expanded="false">
-                                                <i class="bi bi-three-dots"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a href="{% url 'file-details' doc.id%}" class="dropdown-item">View</a>
-                                                <a href="{% url 'delete-file' doc.id %}" class="dropdown-item" style="color: red;">Delete</a>
-                                               
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+                    <div class="mb-4">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <i class="bi bi-check2 me-2"></i>
+                                Unlimited file uploads
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check2 me-2"></i>
+                                Unlimited file storage
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check2 me-2"></i>
+                                Unlimited AI queries
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check2 me-2"></i>
+                                File sharing
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check2 me-2"></i>
+                                Custom AI Domain
+                            </li>
+                            <li class="list-group-item">
+                                <i class="bi bi-check2 me-2"></i>
+                                Custom AI Queries
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    <div class="text-center">
+                        <a href="#" class="btn btn-primary">Get Started</a>
                     </div>
                 </div>
             </div>
@@ -570,7 +499,7 @@
 
     <!-- content-footer -->
     <footer class="content-footer">
-        <div><a href="https://cakeadmin.com" target="_blank">Ireme AI</a> © 2024</div>
+        <div><a href="https://cakeadmin.com" target="_blank">CakeAdmin</a> © 2023</div>
         <div>
             <nav class="nav gap-4">
                 <a href="https://themeforest.net/licenses/standard" class="nav-link">Licenses</a>
@@ -582,5 +511,4 @@
     <!-- ./ content-footer -->
 
 </div>
-
 {% endblock content %}

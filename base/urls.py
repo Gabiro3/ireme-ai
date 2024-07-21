@@ -13,4 +13,5 @@ urlpatterns = [
     path('profile/', views.user_profile, name="profile"),
     path('search/', views.search_page, name="search"),
     path('coming-soon/', views.under_construction, name="coming-soon"),
+    path('pricing/', views.pricing, name="pricing"),
 ]
