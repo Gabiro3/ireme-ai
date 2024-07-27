@@ -10,7 +10,7 @@ from django.templatetags.static import static
 import mimetypes
 import re
 import requests, json
-from ai.read_file import extract_from_word, extract_text_from_pdf, summarize, tag  # Import your extraction functions
+from ai.read_file import extract_from_word, extract_text_from_pdf, summarize, tag, extract_excel_data  # Import your extraction functions
 # Define the MIME type to friendly name mapping
 MIME_TYPE_MAPPING = {
     'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'docx',
@@ -78,8 +78,9 @@ def registerPage(request):
 @login_required(login_url='login')
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
+    image_url = ''
     docs = File.objects.filter(host=request.user)
-    docs = File.objects.filter(
+    docs = docs.filter(
         Q(fname__icontains=q) | 
         Q(file_text__icontains=q) | 
         Q(file_type__icontains=q) | 
@@ -92,6 +93,7 @@ def home(request):
         docs.file_summary = re.sub(r'\*', '', doc.file_summary)
         doc.file_size = round(doc.file_size / (1024 * 1024), 2)
         image_url = static(f'images/{doc.file_type}.png')
+
 
     total_storage = sum(doc.file_size for doc in docs)
 
@@ -108,8 +110,8 @@ def home(request):
 
 @login_required(login_url='login')
 def upload_file(request):
+    user_files = File.objects.filter(host=request.user)
     if request.method == 'POST':
-        user_files = File.objects.filter(host=request.user)
         form = FileUploadForm(request.POST, request.FILES)
 
         if form.is_valid():
@@ -127,7 +129,7 @@ def upload_file(request):
                 file_instance.file_text = extract_text_from_pdf(file_instance.file_content)
             else:
                 messages.error(request, "Unsupported file type.")
-                return redirect('upload_file')
+                return redirect('upload-file')
             
             file_summary = summarize(file_instance.file_text)
             file_tags = tag(file_instance.file_text)
@@ -141,7 +143,7 @@ def upload_file(request):
             messages.error(request, "File could not be uploaded")
     else:
         form = FileUploadForm()
-    return render(request, 'pages/upload.html', {'form': form})
+    return render(request, 'pages/upload.html', {'form': form, 'user_files': user_files.count()})
 
 @login_required(login_url='login')
 def delete_file(request, pk):

@@ -9,7 +9,7 @@ class FileUploadForm(forms.ModelForm):
 class UserCreationForm(forms.ModelForm):
     class Meta:
         model = Techie
-        fields = ['email', 'name',  'password', 'user_plan']
+        fields = ['email', 'name',  'password']
 
 class UserLoginForm(forms.ModelForm):
     class Meta:

@@ -32,6 +32,7 @@
                                     <button class="btn btn-primary" type="submit">Submit</button>
                                 </div>
                             </form>
+                            
                         </div>
                     </div>
                 </div>
@@ -45,11 +46,10 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body text-center">
-                <img src="{% static 'logo.png' %}" alt="sticker" width="50">
-                <div class="spinner-border" role="status">
+                <div class="preloader-icon" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div>
-                <p>Adding some AI magic✨</p>
+                <p>AI is generating</p>
             </div>
         </div>
     </div>
@@ -57,9 +57,31 @@
 
 
 
+
 <script>
     document.getElementById('upload-form').addEventListener('submit', function(event) {
         event.preventDefault();
+
+        // Assuming user_files is rendered in a hidden input or a global JavaScript variable
+        const userFileCount = parseInt('{{ user_files }}', 10);
+
+        if (userFileCount >= 3) {
+            alert("Basic Plan only allows 3 file uploads, Subscribe for more!");
+            return; // Stop the form submission
+        }
+
+        const allowedFileTypes = ['application/pdf', 'application/msword', 
+                                  'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 
+                                  'application/pdf', 
+                                  ];
+        const fileInput = document.querySelector('input[type="file"]');
+        const file = fileInput.files[0];
+
+        if (file && !allowedFileTypes.includes(file.type)) {
+            alert("File type not supported. Please upload a PDF or a Word document");
+            return; // Stop the form submission
+        }
+
         showLoadingModal();
 
         // Perform the form submission using fetch
@@ -109,6 +131,8 @@
         modal.show();
     }
 </script>
+
+
 
 
 {% endblock content %}
