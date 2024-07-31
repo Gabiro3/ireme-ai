@@ -99,17 +99,12 @@
                                            required>
                                 </div>
                                 <div class="mb-3">
-                                    <input type="text" name="user_plan" class="form-control" placeholder="Enter user plan"
-                                           required>
-                                           <input required type="text" name="user_plan" id="user_plan" list="user-plans" />
-                                           <datalist id="user-plans">
-                                             <select id="user_plan">
-                                               <option value="">Select your plan</option>
-                                               <option value="Basic">Basic</option>
-                                               <option value="Pro">Professional</option>
-                                               <option value="Enterprise">Enterprise</option>
-                                             </select>
-                                           </datalist>
+                                    <label for="user_plan" class="form-label">User Plan</label>
+                                    <select name="user_plan" id="user_plan" class="form-control" required>
+                                        <option value="Basic">Basic</option>
+                                        <option value="Professional">Professional</option>
+                                        <option value="Starter">Starter</option>
+                                    </select>
                                 </div>
                                 
                                 <div class="mb-3 position-relative">
