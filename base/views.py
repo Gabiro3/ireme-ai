@@ -24,24 +24,28 @@ def loginPage(request):
     page = 'login'
     if request.user.is_authenticated:
         return redirect('home')
-    
 
     if request.method == 'POST':
-        email = request.POST.get('email').lower()
+        email = request.POST.get('email')
         password = request.POST.get('password')
+
+        print(f"Attempting login for email: {email}")  # Debugging
 
         try:
             user = Techie.objects.get(email=email)
-        except:
+            print(f"User found: {user}")  # Debugging
+        except Techie.DoesNotExist:
             messages.error(request, 'User does not exist')
+            return redirect('login')
 
         user = authenticate(request, email=email, password=password)
-
         if user is not None:
+            print("User authenticated")  # Debugging
             login(request, user)
             return redirect('home')
         else:
-            messages.error(request, 'Username OR password does not exit')
+            print("Authentication failed")  # Debugging
+            messages.error(request, 'Invalid login credentials')
 
     context = {'page': page}
     return render(request, 'pages/login_register.html', context)
@@ -49,21 +53,13 @@ def loginPage(request):
 
 def logoutUser(request):
     logout(request)
-    return redirect('login')
+    return redirect('home')
 
 
 def registerPage(request):
-    form = UserCreationForm()
-    if request.user.is_authenticated:
-        return redirect('home')
-
-
+    form = MyUserCreationForm()
     if request.method == 'POST':
-        form = UserCreationForm(request.POST, request.FILES)
-        psswd1 = request.POST.get('password')
-        psswd2 = request.POST.get('password2')
-        if psswd1 != psswd2:
-            messages.error(request, 'Passwords do not match!')
+        form = MyUserCreationForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save(commit=False)
             user.email = user.email.lower()
@@ -71,8 +67,7 @@ def registerPage(request):
             login(request, user)
             return redirect('home')
         else:
-            messages.error(request, 'An error occurred during registration')
-
+            messages.error(request, 'An error occurred during registration!')
     return render(request, 'pages/login_register.html', {'form': form})
 
 @login_required(login_url='login')
@@ -96,6 +91,8 @@ def home(request):
 
 
     total_storage = sum(doc.file_size for doc in docs)
+
+    chat = Dialogue.objects.filter(host=request.user)
 
     chat = Dialogue.objects.filter(
         Q(query__icontains=q) | 
@@ -155,20 +152,33 @@ def delete_file(request, pk):
 
 @login_required(login_url='login')
 def view_files_grid(request):
-    user_files = File.objects.filter(host=request.user)
-    for file in user_files:
-        image_url = static(f'images/{file.file_type}.png')
-        file.file_size = round(file.file_size / (1024 * 1024), 2)
-    
-    return render(request, 'pages/view-files-grid.html', {'files': user_files, 'image_url': image_url})
+    try:
+        user_files = File.objects.filter(host=request.user)
+        if not user_files.exists():
+            user_files = []
+            image_url = ''
+        else:
+            for file in user_files:
+                image_url = static(f'images/{file.file_type}.png')
+                file.file_size = round(file.file_size / (1024 * 1024), 2)
+        return render(request, 'pages/view-files-grid.html', {'files': user_files, 'image_url': image_url})
+    except Exception as e:
+        return render(request, 'pages/view-files-grid.html', {'files': [], 'image_url': '', 'error': str(e)})
 
 @login_required(login_url='login')
 def view_files_list(request):
-    user_files = File.objects.filter(host=request.user)
-    for file in user_files:
-        image_url = static(f'images/{file.file_type}.png')
-        file.file_size = round(file.file_size / (1024 * 1024), 2)
-    return render(request, 'pages/view-files-list.html', {'files': user_files, 'image_url': image_url})
+    try:
+        user_files = File.objects.filter(host=request.user)
+        if not user_files.exists():
+            user_files = []
+            image_url = ''
+        else:
+            for file in user_files:
+                image_url = static(f'images/{file.file_type}.png')
+                file.file_size = round(file.file_size / (1024 * 1024), 2)
+        return render(request, 'pages/view-files-list.html', {'files': user_files, 'image_url': image_url})
+    except Exception as e:
+        return render(request, 'pages/view-files-list.html', {'files': [], 'image_url': '', 'error': str(e)})
 
 @login_required(login_url='login')
 def file_details(request, pk):
@@ -212,6 +222,7 @@ def file_details(request, pk):
                     # Store the dialogue in the database
                     dialogue = Dialogue(query=user_query, answer=ai_response)
                     dialogue.file = file
+                    dialogue.host = request.user
                     dialogue.save()
 
                     return redirect('file-details', pk=pk)
@@ -220,7 +231,7 @@ def file_details(request, pk):
             except Exception as e:
                 messages.error(request, f"An error occurred: {str(e)}")
     
-    context = {'file': file, 'size': size, 'dialogues': dialogues, 'image_url': image_url}
+    context = {'file': file, 'size': size, 'dialogues': dialogues, 'image_url': image_url, 'ai_queries': dialogues.count()}
     return render(request, 'pages/file-details.html', context)
 
 @login_required(login_url='login')

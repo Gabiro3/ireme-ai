@@ -23,15 +23,15 @@
                                     <h1 class="display-8">Welcome back!</h1>
                                     <p class="text-muted">Log into your account now</p>
                                 </div>
-                                <form class="mb-5" method="POST">
+                                <form class="mb-5" action="" method="POST">
                                     {% csrf_token %}
-                                    <div class="mb-3">
-                                        <input type="email" name="email" class="form-control" placeholder="Enter email address" autofocus
+                                    <div class="mb-3" name="email">
+                                        <input name="email" type="email" class="form-control" placeholder="Enter email address" autofocus
                                                required>
                                     </div>
-                                    <div class="mb-3">
-                                        <input type="password" name="password" class="form-control" placeholder="Enter password"
-                                               required>
+                                    <div class="mb-3 position-relative" name="email">
+                                        <input type="password" id="password" name="password" class="form-control" placeholder="Enter password" required>
+                                        <i class="bi bi-eye toggle-password position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%); cursor: pointer; color: gray;"></i>
                                     </div>
                                     
                                     <div class="text-center text-lg-start">
@@ -83,8 +83,9 @@
                                 <h1 class="display-8">Create Account</h1>
                                 <p class="text-muted">You can create a free account now</p>
                             </div>
-                            <form class="mb-5" method="POST", enctype="multipart/form-data">
+                            <form class="mb-5" method="POST" enctype="multipart/form-data">
                                 {% csrf_token %}
+                                
                                 <div class="mb-3">
                                     <input type="text" name="name" class="form-control" placeholder="Enter fullname" autofocus
                                            required>
@@ -93,14 +94,31 @@
                                     <input type="email" name="email" class="form-control" placeholder="Enter email address"
                                            required>
                                 </div>
+                                <div class="mb-3">
+                                    <input type="file" name="avatar" class="form-control" placeholder="Enter email address"
+                                           required>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" name="user_plan" class="form-control" placeholder="Enter user plan"
+                                           required>
+                                           <input required type="text" name="user_plan" id="user_plan" list="user-plans" />
+                                           <datalist id="user-plans">
+                                             <select id="user_plan">
+                                               <option value="">Select your plan</option>
+                                               <option value="Basic">Basic</option>
+                                               <option value="Pro">Professional</option>
+                                               <option value="Enterprise">Enterprise</option>
+                                             </select>
+                                           </datalist>
+                                </div>
                                 
                                 <div class="mb-3 position-relative">
-                                    <input type="password" id="password" name="password" class="form-control" placeholder="Enter password" required>
+                                    <input type="password" name="password1" class="form-control" placeholder="Enter password" required>
                                     <i class="bi bi-eye toggle-password position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%); cursor: pointer; color: gray;"></i>
                                 </div>
                                 <div class="mb-3 position-relative">
-                                    <input type="password" id="password2" name="password2" class="form-control" placeholder="Re-enter password" required>
-                                    <i class="bi bi-eye toggle-password position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%); cursor: pointer;"></i>
+                                    <input type="password" name="password2" class="form-control" placeholder="Enter password" required>
+                                    <i class="bi bi-eye toggle-password position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%); cursor: pointer; color: gray;"></i>
                                 </div>
                                 
                                 <div class="text-center text-lg-start">
@@ -145,29 +163,5 @@
 {% endfor %}
 {% endif %}
 {% endif %}
-<script>
- document.querySelectorAll('.toggle-password').forEach(function(togglePasswordIcon) {
-  togglePasswordIcon.addEventListener('click', function() {
-      const input = this.previousElementSibling;
-      const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
-      input.setAttribute('type', type);
-      this.classList.toggle('bi bi-eye');
-      this.classList.toggle('bi bi-eye-slash');
-  });
-});
-    
-
-    // script.js 
-
-  // Get the snackbar DIV
-  var x = document.getElementById("snackbar");
-
-  // Add the "show" class to DIV
-  x.className = "show";
-
-  // After 3 seconds, remove the show class from DIV
-  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
-
-</script>
 
 {% endblock content %}

@@ -377,6 +377,9 @@
                                         <span>{{size}} MB</span>
                                         <img src="{{ image_url }}" class="rounded" width="42"
                                      alt="File Cover">
+                                     <a href="{% url 'delete-file' file.id %}" class="text-danger me-3" title="Remove">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
                                     </p>
                                     <p class="file-summary">{{file.file_summary}}</p>
                                     
@@ -464,7 +467,7 @@
 
     </div>
     <footer class="content-footer">
-        <div><a href="https://cakeadmin.com" target="_blank">Ireme AI</a> © 2024</div>
+        <div><a href="https://ireme-ai.vercel.app" target="_blank">Ireme AI</a> © 2024</div>
         <div>
             <nav class="nav gap-4">
                 <a href="https://themeforest.net/licenses/standard" class="nav-link">Licenses</a>
@@ -482,6 +485,12 @@
 
         // Create a FormData object from the form
         const formData = new FormData(this);
+        const userFileCount = parseInt('{{ ai_queries }}', 10);
+
+        if (userFileCount >= 5) {
+            alert("Basic Plan only allows 5 AI Queries, Subscribe for more!");
+            return; // Stop the form submission
+        }
 
         // Perform the form submission using fetch
         fetch(this.action, {

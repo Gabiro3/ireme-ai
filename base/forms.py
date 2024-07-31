@@ -1,17 +1,13 @@
 from django import forms
 from .models import *
+from django.contrib.auth.forms import UserCreationForm
 
 class FileUploadForm(forms.ModelForm):
     class Meta:
         model = File
         fields = ['fname', 'file_content']
 
-class UserCreationForm(forms.ModelForm):
+class MyUserCreationForm(UserCreationForm):
     class Meta:
         model = Techie
-        fields = ['email', 'name',  'password']
-
-class UserLoginForm(forms.ModelForm):
-    class Meta:
-        model = Techie
-        fields = ['email', 'password']
+        fields = ['name', 'email', 'avatar', 'user_plan', 'password1', 'password2']
