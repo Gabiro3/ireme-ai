@@ -74,8 +74,8 @@ def registerPage(request):
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     image_url = ''
-    docs = File.objects.filter(host=request.user)
-    docs = docs.filter(
+    docs = File.objects.filter(
+        Q(host=request.user) &
         Q(fname__icontains=q) | 
         Q(file_text__icontains=q) | 
         Q(file_type__icontains=q) | 
@@ -92,12 +92,11 @@ def home(request):
 
     total_storage = sum(doc.file_size for doc in docs)
 
-    chat = Dialogue.objects.filter(host=request.user)
 
     chat = Dialogue.objects.filter(
-        Q(query__icontains=q) | 
-        Q(answer__icontains=q)
-    )
+    Q(host=request.user) &
+    Q(query__icontains=q) | Q(answer__icontains=q)
+)
     for query in chat:
         query.answer = re.sub(r'\*\*', '', query.answer)
         query.answer = re.sub(r'\*', '', query.answer)
