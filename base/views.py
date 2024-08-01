@@ -76,11 +76,11 @@ def home(request):
     image_url = ''
     docs = File.objects.filter(
         Q(host=request.user) &
-        Q(fname__icontains=q) | 
+        (Q(fname__icontains=q) | 
         Q(file_text__icontains=q) | 
         Q(file_type__icontains=q) | 
         Q(file_tags__icontains=q) | 
-        Q(file_summary__icontains=q)
+        Q(file_summary__icontains=q))
     )
     docs = docs[:5]
     for doc in docs:
@@ -95,7 +95,7 @@ def home(request):
 
     chat = Dialogue.objects.filter(
     Q(host=request.user) &
-    Q(query__icontains=q) | Q(answer__icontains=q)
+    (Q(query__icontains=q) | Q(answer__icontains=q))
 )
     for query in chat:
         query.answer = re.sub(r'\*\*', '', query.answer)
